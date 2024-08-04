@@ -45,9 +45,10 @@
             background: #4cae4c;
         }
         .title-img {
-            width: 50px;
-            height: 50px;
-            margin-bottom: 10px;
+            width: 100px; /* Adjust width as needed */
+            height: auto; /* Maintain aspect ratio */
+            display: block; /* Ensure the image behaves as a block element */
+            margin: 0 auto 10px; /* Center the image horizontally and add space below */
         }
         .order-item {
             margin: 10px 0;
@@ -71,7 +72,7 @@
             <input type="text" name="name" placeholder="Enter your name" required>
             <input type="text" name="location" placeholder="Enter your location" required>
             <input type="tel" name="number" placeholder="Enter your mobile number" required>
-
+            
             <div id="orders">
                 <div class="order-item">
                     <input type="text" name="food[]" placeholder="Enter the name of food" required>
