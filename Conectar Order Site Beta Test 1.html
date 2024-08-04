@@ -49,6 +49,17 @@
             height: 50px;
             margin-bottom: 10px;
         }
+        .order-item {
+            margin: 10px 0;
+        }
+        .order-item input {
+            margin-bottom: 5px;
+        }
+        .add-order {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
@@ -60,14 +71,34 @@
             <input type="text" name="name" placeholder="Enter your name" required>
             <input type="text" name="location" placeholder="Enter your location" required>
             <input type="tel" name="number" placeholder="Enter your mobile number" required>
-            <input type="text" name="food"  placeholder="Enter the name of food you want"  required>
-            <input type="number" name="quantity" placeholder="Enter how many you want" required>
+
+            <div id="orders">
+                <div class="order-item">
+                    <input type="text" name="food[]" placeholder="Enter the name of food" required>
+                    <input type="number" name="quantity[]" placeholder="Enter quantity" required>
+                </div>
+            </div>
+
+            <div class="add-order">
+                <button type="button" id="addOrderButton">Add Another Order</button>
+            </div>
 
             <button type="submit">Submit your order</button>
         </form>
         <div id="thanksMessage"></div>
     </div>
     <script>
+        document.querySelector('#addOrderButton').addEventListener('click', function() {
+            const ordersContainer = document.querySelector('#orders');
+            const newOrderItem = document.createElement('div');
+            newOrderItem.classList.add('order-item');
+            newOrderItem.innerHTML = `
+                <input type="text" name="food[]" placeholder="Enter the name of food" required>
+                <input type="number" name="quantity[]" placeholder="Enter quantity" required>
+            `;
+            ordersContainer.appendChild(newOrderItem);
+        });
+
         document.querySelector('form').addEventListener('submit', function(event) {
             event.preventDefault();
             const name = document.querySelector('input[name="name"]').value;
@@ -80,8 +111,14 @@
                 }
             }).then(response => {
                 if (response.ok) {
-                    document.getElementById('thanksMessage').innerHTML = `Thank you for ordering from Conectar!Well get back to you soon, ${name}!`;
+                    document.getElementById('thanksMessage').innerHTML = `Thank you for ordering from Conectar! We'll get back to you soon, ${name}!`;
                     form.reset();
+                    document.querySelector('#orders').innerHTML = `
+                        <div class="order-item">
+                            <input type="text" name="food[]" placeholder="Enter the name of food" required>
+                            <input type="number" name="quantity[]" placeholder="Enter quantity" required>
+                        </div>
+                    `;
                 } else {
                     document.getElementById('thanksMessage').innerHTML = `Oops! There was a problem with your order.`;
                 }
@@ -91,5 +128,4 @@
         });
     </script>
 </body>
-</html>>
 </html>
