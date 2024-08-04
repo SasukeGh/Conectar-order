@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conectar Restaurant</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        h1, h2 {
+            margin-bottom: 10px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background: #5cb85c;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #4cae4c;
+        }
+        .title-img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://telegra.ph/file/1c46132d4fff0accafde6.jpg" alt="Conectar Restaurant" class="title-img">
+        <h1>CONECTAR RESTAURANT ORDER FORM</h1>
+        <h2>Created by: Kwabena Osei Nketiah. All rights reserved</h2>
+        <form action="https://formspree.io/f/xzzprolj" method="post" enctype="multipart/form-data" id="orderForm">
+            <input type="text" name="name" placeholder="Enter your name" required>
+            <input type="text" name="location" placeholder="Enter your location" required>
+            <input type="tel" name="number" placeholder="Enter your mobile number" required>
+            <input type="text" name="food"  placeholder="Enter the name of food you want"  required>
+            <input type="number" name="quantity" placeholder="Enter how many you want" required>
+
+            <button type="submit">Submit your order</button>
+        </form>
+        <div id="thanksMessage"></div>
+    </div>
+    <script>
+        document.querySelector('form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.querySelector('input[name="name"]').value;
+            const form = event.target;
+            fetch(form.action, {
+                method: form.method,
+                body: new FormData(form),
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    document.getElementById('thanksMessage').innerHTML = `Thank you for ordering from Conectar!Well get back to you soon, ${name}!`;
+                    form.reset();
+                } else {
+                    document.getElementById('thanksMessage').innerHTML = `Oops! There was a problem with your order.`;
+                }
+            }).catch(error => {
+                document.getElementById('thanksMessage').innerHTML = `Oops! There was a problem with your order.`;
+            });
+        });
+    </script>
+</body>
+</html>>
+</html>
