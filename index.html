@@ -75,7 +75,7 @@
             
             <div id="orders">
                 <div class="order-item">
-                    <input type="text" name="food[]" placeholder="Enter the name of food" required>
+                    <input type="text" name="food[]" placeholder="Enter your food/dish" required>
                     <input type="number" name="quantity[]" placeholder="Enter quantity" required>
                 </div>
             </div>
@@ -94,7 +94,7 @@
             const newOrderItem = document.createElement('div');
             newOrderItem.classList.add('order-item');
             newOrderItem.innerHTML = `
-                <input type="text" name="food[]" placeholder="Enter the name of food" required>
+                <input type="text" name="food[]" placeholder="Enter your food/dish" required>
                 <input type="number" name="quantity[]" placeholder="Enter quantity" required>
             `;
             ordersContainer.appendChild(newOrderItem);
